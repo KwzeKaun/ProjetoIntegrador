@@ -1,0 +1,28 @@
+nome da database: cantina
+
+
+
+create table usuarios (
+    id serial primary key,
+    nome varchar(100) not null,
+    email varchar(100) not null unique,
+    senha varchar(100) not null
+);
+
+create table produtos (
+    id serial primary key,
+    nome varchar(100) not null,
+    descricao varchar(255),
+    preco decimal(10,2) not null
+);
+
+create table pedidos (
+    id serial primary key,
+    id_usuario int not null,
+    id_produto int not null,
+    quantidade int not null,
+    status varchar(20) not null,
+
+    constraint fk_pedidos_usuarios foreign key (id_usuario) references usuarios(id),
+    constraint fk_pedidos_produtos foreign key (id_produto) references produtos(id)
+);
